@@ -14,6 +14,12 @@ public class PlatformGenerator : MonoBehaviour {
 
 	public ObjectPooler[] objectPools;
 
+	private float minHeight;
+	public Transform maxHeightPoint;
+	private float maxHeight;
+	public float maxHeightChange;
+	private float heightChange;
+
 
 	void Start(){
 		//platformWidth = generatedPlatform.GetComponent<BoxCollider2D> ().size.x;
@@ -22,6 +28,9 @@ public class PlatformGenerator : MonoBehaviour {
 		for(int i = 0 ; i<objectPools.Length; i++){
 			platformsWidths [i] = objectPools[i].pooledObject.GetComponent<BoxCollider2D> ().size.x;
 		}
+		minHeight = transform.position.y;
+		maxHeight = maxHeightPoint.position.y;
+
 	}
 
 	void Update(){
@@ -31,7 +40,15 @@ public class PlatformGenerator : MonoBehaviour {
 
 			randomizeSelector = Random.Range (0, objectPools.Length);
 
-			transform.position = new Vector3 (transform.position.x + (platformsWidths[randomizeSelector] / 2) + distanceBetween, transform.position.y, transform.position.z);
+			heightChange = transform.position.y + Random.Range (maxHeightChange, -maxHeightChange);
+
+			if (heightChange > maxHeight) {
+				heightChange = maxHeight;
+			}else if(heightChange < minHeight){
+				heightChange = minHeight;
+			}
+
+			transform.position = new Vector3 (transform.position.x + (platformsWidths[randomizeSelector] / 2) + distanceBetween, heightChange, transform.position.z);
 
 
 
