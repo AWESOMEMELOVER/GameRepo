@@ -19,7 +19,8 @@ public class PlatformGenerator : MonoBehaviour {
 	private float maxHeight;
 	public float maxHeightChange;
 	private float heightChange;
-
+	private CoinGenerator coinGenerator;
+	public float randomCoinMaxCuantity;
 
 	void Start(){
 		//platformWidth = generatedPlatform.GetComponent<BoxCollider2D> ().size.x;
@@ -30,6 +31,8 @@ public class PlatformGenerator : MonoBehaviour {
 		}
 		minHeight = transform.position.y;
 		maxHeight = maxHeightPoint.position.y;
+
+		coinGenerator = FindObjectOfType<CoinGenerator> ();
 
 	}
 
@@ -64,6 +67,9 @@ public class PlatformGenerator : MonoBehaviour {
 			newPlatform.transform.rotation = transform.rotation;
 			newPlatform.SetActive (true);
 
+			if (Random.Range (0f, 100f) < randomCoinMaxCuantity) {
+				coinGenerator.SpawnCoins (new Vector3 (transform.position.x, transform.position.y + 1f, transform.position.z));
+			}
 			transform.position = new Vector3 (transform.position.x + (platformsWidths[randomizeSelector] / 2), transform.position.y, transform.position.z);
 
 		}
