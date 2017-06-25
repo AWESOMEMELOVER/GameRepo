@@ -21,6 +21,8 @@ public class PlatformGenerator : MonoBehaviour {
 	private float heightChange;
 	private CoinGenerator coinGenerator;
 	public float randomCoinMaxCuantity;
+	public float randomMonsterTreashhold;
+	public ObjectPooler monsterPool;
 
 	void Start(){
 		//platformWidth = generatedPlatform.GetComponent<BoxCollider2D> ().size.x;
@@ -70,6 +72,17 @@ public class PlatformGenerator : MonoBehaviour {
 			if (Random.Range (0f, 100f) < randomCoinMaxCuantity) {
 				coinGenerator.SpawnCoins (new Vector3 (transform.position.x, transform.position.y + 1f, transform.position.z));
 			}
+			if (Random.Range (0f, 100f) < randomMonsterTreashhold) {
+				GameObject newMonster = monsterPool.GetPooledObject ();
+
+				Vector3 monsterPosition = new Vector3 (0f, 1.5f, 0f);
+
+				newMonster.transform.position = transform.position+monsterPosition;
+				newMonster.transform.rotation = transform.rotation;
+				newMonster.SetActive (true);
+			}
+
+
 			transform.position = new Vector3 (transform.position.x + (platformsWidths[randomizeSelector] / 2), transform.position.y, transform.position.z);
 
 		}

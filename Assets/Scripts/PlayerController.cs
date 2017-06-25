@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask whatIsGround;
 	private Collider2D collider;
 	private Animator animator;
+	private bool stoppedJumping;
 
 	public GameManager theGameManager;
 	// Use this for initialization
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		jumpTimeCounter = jumpTime;
 		speedMilesCount = speedBoosterMiles;
+		stoppedJumping = true;
 	}
 
 	// Update is called once per frame
@@ -53,9 +55,10 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (grounded) {
 				catBody.velocity = new Vector2 (catBody.velocity.x, jumpForce);	
+				stoppedJumping = false;
 			}
 		}
-		if (Input.GetKey (KeyCode.Space)) {
+		if (Input.GetKey (KeyCode.Space) && !stoppedJumping) {
 			if (jumpTimeCounter > 0) {
 				catBody.velocity = new Vector2 (catBody.velocity.x, jumpForce);
 				jumpTimeCounter -= Time.deltaTime;
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		if(Input.GetKeyUp(KeyCode.Space)){
 			jumpTimeCounter = 0;
+			stoppedJumping = true;
 		}
 		if(grounded){
 			jumpTimeCounter = jumpTime;
