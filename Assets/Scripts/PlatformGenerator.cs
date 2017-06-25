@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour {
 
-	public GameObject generatingPlatform;
+	public GameObject generatedPlatform;
 	public Transform generationPoint;
-	public float distanceBetween;
-	private float platformWidth;
+	public float distanceWidthMin , distanceWidthMax;
+	private float  platformWidth,distanceBetween;
 
-	// Use this for initialization
-	void Start () {
-		platformWidth = generationPoint.GetComponent<BoxCollider2D> ().size.x;
+	public ObjectPooler objectPool;
+
+
+	void Start(){
+		platformWidth = generatedPlatform.GetComponent<BoxCollider2D> ().size.x;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update(){
 
 		if (transform.position.x < generationPoint.position.x) {
+			distanceBetween = Random.Range (distanceWidthMin, distanceWidthMax);
+
+
 			transform.position = new Vector3 (transform.position.x + platformWidth + distanceBetween, transform.position.y, transform.position.z);
-			//create copy of already existing object
-			Instantiate (generatingPlatform , transform.position, transform.rotation);
+
+			//get new platform from already created platformPool
+			GameObject newPlatform = objectPool.GetPooledObject();
+			newPlatform.transform.position = transform.position;
+			newPlatform.transform.rotation = transform.rotation;
+			newPlatform.SetActive (true);
 		}
+
 	}
+
 }

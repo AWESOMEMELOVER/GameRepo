@@ -20,7 +20,7 @@ public class GameManeger : MonoBehaviour {
 	void Update () {
 		
 	}
-	public void RestartGame()
+	/*public void RestartGame()
 	{
 		StartCoroutine ("RestartGameCo");
 	}
@@ -30,6 +30,6 @@ public class GameManeger : MonoBehaviour {
 		thePlayer.transform.position = playerStartPoint;
 		platformGenerator.position = platformStartPoint;
 		thePlayer.gameObject.SetActive (true);
-	}
+	}*/
 }
 
