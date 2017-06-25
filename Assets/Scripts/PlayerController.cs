@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 	private Collider2D collider;
 	private Animator animator;
 
-	public GameManeger theGameManeger;
+	public GameManager theGameManager;
 	// Use this for initialization
 	void Start () {
 		catBody = GetComponent<Rigidbody2D> ();
@@ -71,11 +71,11 @@ public class PlayerController : MonoBehaviour {
 
 		animator.SetBool ("Grounded", grounded);
 	}
-//	void onCollisionEnter2D (Collision2D other)
-//	{
-//		if(other.gameObject.tag == "killbox"
-//			{
-//				theGameManeger.RestartGame();
-//			}
-//	}
+	void OnCollisionEnter2D (Collision2D other)
+	{
+		if(other.gameObject.tag == "killbox")
+			{
+				theGameManager.RestartGame();
+			}
+	}
 }
