@@ -23,6 +23,8 @@ public class PlatformGenerator : MonoBehaviour {
 	public float randomCoinMaxCuantity;
 	public float randomMonsterTreashhold;
 	public ObjectPooler monsterPool;
+	public ObjectPooler backGroundPool;
+
 
 	void Start(){
 		//platformWidth = generatedPlatform.GetComponent<BoxCollider2D> ().size.x;
@@ -58,8 +60,6 @@ public class PlatformGenerator : MonoBehaviour {
 
 
 
-
-			//Instantiate (objectPools[randomizeSelector], transform.position, transform.rotation);
 
 
 
