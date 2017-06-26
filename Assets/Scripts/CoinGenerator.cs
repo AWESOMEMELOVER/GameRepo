@@ -29,10 +29,6 @@ public class CoinGenerator : MonoBehaviour {
 		coin1.transform.position = new Vector3 (startPosition.x - distanceBetweenCoins, startPosition.y, startPosition.z);
 		coin1.SetActive (true);
 
-		GameObject coin3 = coinPool.GetPooledObject ();
-		coin1.transform.position = new Vector3 (startPosition.x + distanceBetweenCoins, startPosition.y, startPosition.z);
-		coin1.SetActive (true);
-
 
 	}
 }
