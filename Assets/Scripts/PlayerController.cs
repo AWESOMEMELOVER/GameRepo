@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour {
 	private Collider2D collider;
 	private Animator animator;
 	private bool stoppedJumping;
+	public AudioSource deathSound;
+
 
 	public GameManager theGameManager;
 	// Use this for initialization
@@ -80,6 +82,8 @@ public class PlayerController : MonoBehaviour {
 		if(other.gameObject.tag == "killbox")
 			{
 				theGameManager.RestartGame();
+			deathSound.Play ();
+
 			}
 	}
 }
